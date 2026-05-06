@@ -1,0 +1,1 @@
+<h1>ACTIVIDAD DETALLE</h1>
