@@ -51,13 +51,13 @@
     <header class="fixed w-full top-0 z-50 bg-white shadow-sm transition-all duration-300">
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
+            <div class="flex justify-between items-center h-20 min-w-0">
 
             <!-- LOGO -->
-            <div class="flex-shrink-0 flex items-center cursor-pointer">
-                <a href="{{ route('home') }}" class="flex items-center text-charcoal">
-                <img src="{{ asset('logo-sportsCenter.png') }}" alt="SportsCenter Logo" class="h-9 w-auto mr-2">
-                <img src="{{ asset('icono-sportsCenter.png') }}" alt="SportsCenter Icon" class="h-12 w-auto">
+            <div class="flex items-center cursor-pointer min-w-0">
+                <a href="{{ route('home') }}" class="flex items-center text-charcoal min-w-0">
+                <img src="{{ asset('logo-sportsCenter.png') }}" alt="SportsCenter Logo" class="h-8 sm:h-9 w-auto mr-1 sm:mr-2 shrink-0">
+                <img src="{{ asset('icono-sportsCenter.png') }}" alt="SportsCenter Icon" class="hidden sm:block h-12 w-auto shrink-0">
                 </a>
             </div>
 
@@ -91,7 +91,42 @@
                 @endauth
             </div>
 
+            <!-- BOTÓN MENÚ MÓVIL -->
+            <div class="md:hidden flex items-center shrink-0">
+                <button id="mobile-menu-btn" class="text-charcoal focus:outline-none hover:text-brand transition-colors">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
             </div>
+
+            </div>
+        </div>
+
+        <!-- MENÚ MÓVIL DESPLEGABLE -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md border-t border-gray-100 absolute w-full left-0 top-full">
+            <nav class="flex flex-col px-6 pt-4 pb-6 space-y-4">
+                <a href="{{ route('home') }}" class="text-charcoal font-semibold hover:text-brand transition-colors duration-300">Inicio</a>
+                <a href="{{ route('catalogo') }}" class="text-charcoal font-semibold hover:text-brand transition-colors duration-300">Catálogo</a>
+                <a href="{{ route('instalaciones') }}" class="text-charcoal font-semibold hover:text-brand transition-colors duration-300">Instalaciones</a>
+                <a href="{{ route('contacto') }}" class="text-charcoal font-semibold hover:text-brand transition-colors duration-300">Contacto</a>
+                
+                @auth
+                    @if (auth()->user()->role === 'admin')
+                        <a href="{{ route('admin.panel') }}" class="text-brand font-semibold hover:text-brand-hover transition-colors duration-300">Panel Admin</a>
+                    @else
+                        <a href="{{ route('reservas') }}" class="text-brand font-semibold hover:text-brand-hover transition-colors duration-300">Reservas</a>
+                    @endif
+                    <hr class="border-gray-200 my-2">
+                    <a href="{{ route('profile') }}" class="text-charcoal font-semibold hover:text-brand transition-colors duration-300">Perfil</a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="w-full text-left text-charcoal font-semibold hover:text-brand transition-colors duration-300">Salir</button>
+                    </form>
+                @else
+                    <hr class="border-gray-200 my-2">
+                    <a href="{{ route('login') }}" class="text-charcoal font-semibold hover:text-brand transition-colors duration-300">Acceder</a>
+                    <a href="{{ route('register') }}" class="inline-block bg-brand hover:bg-brand-hover text-white px-5 py-2.5 rounded-full font-bold transition-all text-center mt-2">Únete ahora</a>
+                @endauth
+            </nav>
         </div>
 
     </header>
@@ -110,8 +145,8 @@
             <div class="flex flex-col md:flex-row justify-between items-center mb-8">
                 <!-- Logo Footer -->
                 <div class="flex items-center mb-6 md:mb-0">
-                    <img src="{{ asset('logo-sportsCenter.png') }}" alt="SportsCenter Logo" class="h-12 w-auto mr-2 grayscale brightness-200">
-                    <img src="{{ asset('icono-sportsCenter.png') }}" alt="SportsCenter Icon" class="h-20 w-auto grayscale brightness-200">
+                    <img src="{{ asset('logo-sportsCenter.png') }}" alt="SportsCenter Logo" class="h-6 sm:h-9 md:h-12 w-auto mr-2 grayscale brightness-200">
+                    <img src="{{ asset('icono-sportsCenter.png') }}" alt="SportsCenter Icon" class="h-10 sm:h-16 md:h-20 w-auto grayscale brightness-200">
 
                 </div>
                 
@@ -133,6 +168,18 @@
 
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            
+            if (btn && menu) {
+                btn.addEventListener('click', () => {
+                    menu.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
     @stack('scripts')
 
 </body>
