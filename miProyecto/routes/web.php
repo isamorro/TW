@@ -2,10 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Activity;
+use App\Models\Installation;
 
 use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\Admin\InstallationController;
+
 
 
 // Rutas publicas
@@ -31,7 +34,8 @@ Route::get('/catalogo/{activity}', function (Activity $activity) {
 })->name('activities.show');
 
 Route::get('/instalaciones', function () {
-    return view('instalaciones');
+    $installations = Installation::orderBy('name')->get();
+    return view('instalaciones', compact('installations'));
 })->name('instalaciones');
 
 // Rutas Autenticación 
@@ -70,10 +74,15 @@ Route::get('/usuario/reservas', function () {
 // Rutas Administración
 
 Route::middleware(['auth', 'admin'])->group(function () {
+
     Route::get('/admin/panel', function () {
         return view('admin/panel-admin');
     })->name('admin.panel');
 
     Route::resource('/admin/activities', ActivityController::class)
         ->names('admin.activities');
+
+    Route::resource('/admin/installations', InstallationController::class)
+        ->names('admin.installations');
+
 });

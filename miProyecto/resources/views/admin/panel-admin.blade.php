@@ -66,12 +66,12 @@
 
                 <div class="flex flex-col gap-3">
 
-                    <a href="#"
+                    <a href="{{ route('instalaciones') }}"
                     class="bg-brand hover:bg-brand-hover text-white px-5 py-3 rounded-xl font-bold text-center transition-all duration-300">
                         Gestionar instalaciones
                     </a>
 
-                    <a href="#"
+                    <a href="{{ route('admin.installations.create') }}"
                     class="border border-gray-200 hover:border-brand hover:text-brand px-5 py-3 rounded-xl font-semibold text-center transition-all duration-300">
                         Crear instalación
                     </a>

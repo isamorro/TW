@@ -9,11 +9,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('installations', function (Blueprint $table) {
+
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->enum('status', ['available', 'maintenance'])->default('available');
+            $table->string('image_path')->nullable();
+            $table->enum('status', ['available', 'maintenance'])
+                  ->default('available');
             $table->timestamps();
+
         });
     }
 
