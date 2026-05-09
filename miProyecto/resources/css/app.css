@@ -101,3 +101,105 @@ body {
     font-size: 14px;
     margin-bottom: 10px;
 }
+
+/*  CREAR Y MODIFICAR ACTIVIDAD */
+
+.activity-create-container {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 3rem 1rem;
+}
+
+.activity-create-header {
+    margin-bottom: 2rem;
+}
+
+.activity-create-header h1 {
+    font-size: 2.7rem;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 0.5rem;
+}
+
+.activity-create-header p {
+    color: #6b7280;
+    font-size: 1.05rem;
+}
+
+.activity-create-form {
+    background: #ffffff;
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 10px 30px rgba(17, 24, 39, 0.08);
+}
+
+.activity-form-group {
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+.activity-form-group span {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.6rem;
+}
+
+.activity-form-group input,
+.activity-form-group textarea {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    border-radius: 1rem;
+    padding: 1rem 1.1rem;
+    font-size: 1rem;
+    color: #111827;
+    background: #f9fafb;
+    transition: all 0.25s ease;
+}
+
+.activity-form-group input:focus,
+.activity-form-group textarea:focus {
+    outline: none;
+    border-color: #589337;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(88, 147, 55, 0.15);
+}
+
+.activity-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.activity-btn-primary,
+.activity-btn-secondary {
+    padding: 0.9rem 1.5rem;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.activity-btn-primary {
+    background: #589337;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.activity-btn-primary:hover {
+    background: #4a7d2f;
+    transform: translateY(-2px);
+}
+
+.activity-btn-secondary {
+    background: #f3f4f6;
+    color: #111827;
+}
+
+.activity-btn-secondary:hover {
+    background: #e5e7eb;
+}

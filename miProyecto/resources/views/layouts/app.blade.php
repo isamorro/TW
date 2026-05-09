@@ -62,7 +62,7 @@
             </div>
 
             <!-- NAV -->
-            <nav class="hidden md:flex space-x-8">
+            <nav class="hidden lg:flex space-x-6">
                 <a href="{{ route('home') }}" class="text-charcoal font-semibold hover:text-brand transition-colors duration-300">Inicio</a>
                 <a href="{{ route('catalogo') }}" class="text-charcoal font-semibold hover:text-brand transition-colors duration-300">Catálogo</a>
                 <a href="{{ route('instalaciones') }}" class="text-charcoal font-semibold hover:text-brand transition-colors duration-300">Instalaciones</a>
@@ -78,31 +78,61 @@
             </nav>
 
             <!-- AUTENTICACION -->
-            <div class="hidden md:flex items-center space-x-4">
+            <div class="hidden lg:flex items-center space-x-3">
                 @auth
-                    <a href="{{ route('profile') }}" class="text-charcoal font-semibold hover:text-brand transition-colors duration-300">Perfil</a>
+                    <div class="text-right leading-tight">
+                        <p class="font-bold text-charcoal">
+                            {{ auth()->user()->name }}
+                        </p>
+                        <p class="text-sm text-brand font-semibold">
+                            {{ ucfirst(auth()->user()->role) }}
+                        </p>
+                    </div>
+
+                    <a href="{{ route('profile') }}" class="text-charcoal font-semibold hover:text-brand transition-colors duration-300">
+                        Perfil
+                    </a>
+
                     <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                         @csrf
-                        <button type="submit" class="border-2 border-charcoal text-charcoal px-4 py-2 rounded-full font-bold hover:bg-charcoal hover:text-white transition-all duration-300">Salir</button>
+                        <button type="submit" class="border-2 border-charcoal text-charcoal px-4 py-2 rounded-full font-bold hover:bg-charcoal hover:text-white transition-all duration-300">
+                            Salir
+                        </button>
                     </form>
                 @else
-                    <a href="{{ route('login') }}" class="border-2 border-gray-200 bg-white text-charcoal px-5 py-2.5 rounded-full font-bold transition-all duration-300 hover:border-brand hover:text-brand">Acceder</a>
-                    <a href="{{ route('register') }}" class="bg-brand hover:bg-brand-hover text-white px-5 py-2.5 rounded-full font-bold transition-all duration-300 hover:scale-105 shadow-md">Únete ahora</a>
+                    <a href="{{ route('login') }}" class="border-2 border-gray-200 bg-white text-charcoal px-5 py-2.5 rounded-full font-bold transition-all duration-300 hover:border-brand hover:text-brand">
+                        Acceder
+                    </a>
+                    <a href="{{ route('register') }}" class="bg-brand hover:bg-brand-hover text-white px-5 py-2.5 rounded-full font-bold transition-all duration-300 hover:scale-105 shadow-md">
+                        Únete ahora
+                    </a>
                 @endauth
             </div>
 
             <!-- BOTÓN MENÚ MÓVIL -->
-            <div class="md:hidden flex items-center shrink-0">
+            <div class="lg:hidden flex items-center shrink-0">
+
+                @auth
+                    <div class="text-right mr-3 leading-tight">
+                        <p class="text-sm font-bold text-charcoal">
+                            {{ auth()->user()->name }}
+                        </p>
+                        <p class="text-xs text-brand font-semibold">
+                            {{ ucfirst(auth()->user()->role) }}
+                        </p>
+                    </div>
+                @endauth
+
                 <button id="mobile-menu-btn" class="text-charcoal focus:outline-none hover:text-brand transition-colors">
                     <i class="fa-solid fa-bars text-2xl"></i>
                 </button>
-            </div>
 
             </div>
+
         </div>
 
         <!-- MENÚ MÓVIL DESPLEGABLE -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md border-t border-gray-100 absolute w-full left-0 top-full">
+        <div id="mobile-menu" class="hidden lg:hidden bg-white shadow-md border-t border-gray-100 absolute w-full left-0 top-full">
             <nav class="flex flex-col px-6 pt-4 pb-6 space-y-4">
                 <a href="{{ route('home') }}" class="text-charcoal font-semibold hover:text-brand transition-colors duration-300">Inicio</a>
                 <a href="{{ route('catalogo') }}" class="text-charcoal font-semibold hover:text-brand transition-colors duration-300">Catálogo</a>
@@ -134,12 +164,79 @@
     <!-- CONTENIDO -->
     <main class="@yield('main-class', 'flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10')">
 
-        @yield('content')
+        @isset($activities)
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+
+                <aside class="lg:col-span-1">
+
+                    <!-- MENÚ MÓVIL DESPLEGABLE -->
+                    <div class="lg:hidden mb-6">
+                        <button id="activities-toggle"
+                                type="button"
+                                class="w-full flex items-center justify-between bg-white rounded-xl shadow p-4 border">
+
+                            <span class="flex items-center gap-3 text-lg font-semibold">
+                                <i class="fa-solid fa-dumbbell text-brand"></i>
+                                Actividades
+                            </span>
+
+                            <i id="activities-arrow"
+                            class="fa-solid fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+
+                        <div id="activities-menu"
+                            class="hidden bg-white rounded-xl shadow p-4 border mt-3">
+
+                            <ul class="space-y-2">
+                                @foreach($activities as $activity)
+                                    <li>
+                                        <a href="{{ route('activities.show', $activity) }}"
+                                        class="block px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors duration-300 text-gray-700">
+                                            {{ $activity->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+
+                        </div>
+                    </div>
+
+                    <!-- MENÚ ESCRITORIO -->
+                    <div class="hidden lg:block bg-white rounded-xl shadow p-6 border sticky top-28">
+
+                        <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-dumbbell text-brand"></i>
+                            Actividades
+                        </h2>
+
+                        <ul class="space-y-2">
+                            @foreach($activities as $activity)
+                                <li>
+                                    <a href="{{ route('activities.show', $activity) }}"
+                                    class="block px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors duration-300 {{ request()->routeIs('activities.show') && request()->route('activity')?->id === $activity->id ? 'bg-gray-200 font-medium' : 'text-gray-700' }}">
+                                        {{ $activity->name }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+
+                    </div>
+
+                </aside>
+
+                <section class="lg:col-span-3">
+                    @yield('content')
+                </section>
+
+            </div>
+        @else
+            @yield('content')
+        @endisset
 
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-charcoal text-white pt-12 pb-8 mt-auto">
+    <footer class="bg-charcoal text-white pt-12 pb-8">
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left">
             <div class="flex flex-col md:flex-row justify-between items-center mb-8">
@@ -176,6 +273,20 @@
             if (btn && menu) {
                 btn.addEventListener('click', () => {
                     menu.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggle = document.getElementById('activities-toggle');
+            const menu = document.getElementById('activities-menu');
+            const arrow = document.getElementById('activities-arrow');
+
+            if (toggle && menu && arrow) {
+                toggle.addEventListener('click', function () {
+                    menu.classList.toggle('hidden');
+                    arrow.classList.toggle('rotate-180');
                 });
             }
         });

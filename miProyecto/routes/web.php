@@ -1,13 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Activity;
 
+use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 
-// |--------------------------------------------------------------------------
-// | Rutas publicas (Consulta de horarios, catálogo de actividades e instalaciones disponibles.)
-// |--------------------------------------------------------------------------
+
+// Rutas publicas
+
 Route::get('/', function () {
     return view('home');
 });
@@ -19,22 +21,20 @@ Route::get('/home', function () {
 })->name('home');
 
 Route::get('/catalogo', function () {
-    return view('catalogo');
+    $activities = Activity::orderBy('name')->get();
+    return view('catalogo', compact('activities'));
 })->name('catalogo');
 
-Route::get('/actividad/{id}', function ($id) {
-    return view('actividad-detalle', compact('id'));
-})->name('actividad.detalle');
+Route::get('/catalogo/{activity}', function (Activity $activity) {
+    $activities = Activity::orderBy('name')->get();
+    return view('actividad-detalle', compact('activity'), compact('activities'));
+})->name('activities.show');
 
 Route::get('/instalaciones', function () {
     return view('instalaciones');
 })->name('instalaciones');
 
-// |--------------------------------------------------------------------------
-// | Rutas Autenticación 
-// | (Reserva de pistas o sesiones, bloqueando la plaza para otros
-// |  usuarios, y consulta del historial de reservas.)
-// |--------------------------------------------------------------------------
+// Rutas Autenticación 
 
 Route::get ('/login', function () {
     return view('login.login');
@@ -67,12 +67,13 @@ Route::get('/usuario/reservas', function () {
     return view('reservas');
 })->middleware('auth')->name('reservas');
 
+// Rutas Administración
 
-// |--------------------------------------------------------------------------
-// | Rutas Administración
-// |--------------------------------------------------------------------------
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/panel', function () {
-        return view('panel-admin');
+        return view('admin/panel-admin');
     })->name('admin.panel');
+
+    Route::resource('/admin/activities', ActivityController::class)
+        ->names('admin.activities');
 });
