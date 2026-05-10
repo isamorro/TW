@@ -16,6 +16,12 @@ class ActivityController extends Controller
         ->with('success', 'Actividad actualizada correctamente.');
     }
 
+    public function adminList()
+    {
+        $activities = Activity::orderBy('name')->get();
+        return view('admin.activities.index', compact('activities'));
+    }
+
     public function create()
     {
         return view('admin.activities.create');

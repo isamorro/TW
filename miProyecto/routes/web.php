@@ -3,11 +3,15 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Activity;
 use App\Models\Installation;
+use App\Models\Reservation;
 
 use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\InstallationController;
+
 
 
 
@@ -17,7 +21,11 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::view('/contacto', 'contacto')->name('contacto');
+Route::get('/contacto', function () {
+    return view('contacto');
+})->name('contacto');
+
+Route::post('/contacto', [ContactController::class, 'send'])->name('contacto.send');
 
 Route::get('/home', function () {
     return view('home');
@@ -75,14 +83,18 @@ Route::get('/usuario/reservas', function () {
 
 Route::middleware(['auth', 'admin'])->group(function () {
 
-    Route::get('/admin/panel', function () {
-        return view('admin/panel-admin');
-    })->name('admin.panel');
+    Route::get('/admin/panel', [AdminController::class, 'index'])->name('admin.panel');
+
+    Route::get('/admin/activities', [ActivityController::class, 'adminList'])->name('admin.activities.index');
 
     Route::resource('/admin/activities', ActivityController::class)
+        ->except(['index'])
         ->names('admin.activities');
 
     Route::resource('/admin/installations', InstallationController::class)
         ->names('admin.installations');
+
+    Route::delete('/admin/reservations/{reservation}', [ReservationController::class, 'destroy'])
+        ->name('admin.reservations.destroy');
 
 });

@@ -19,7 +19,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
 
             <!-- ACTIVIDADES -->
-            <article class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+            <article class="flex flex-col bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
 
                 <div class="flex items-center justify-between mb-6">
                     <h2 class="text-2xl font-bold text-charcoal">
@@ -33,16 +33,16 @@
                     Crea, modifica y elimina las actividades disponibles en SportsCenter.
                 </p>
 
-                <div class="flex flex-col gap-3">
+                <div class="flex flex-col gap-3 mt-auto">
 
                     <a href="{{ route('catalogo') }}"
-                    class="bg-brand hover:bg-brand-hover text-white px-5 py-3 rounded-xl font-bold text-center transition-all duration-300">
+                    class="bg-brand hover:bg-brand-hover text-white px-5 py-3 rounded-xl font-bold text-center transition-all duration-300 min-h-20 content-center">
                         Gestionar actividades
                     </a>
 
                     <a href="{{ route('admin.activities.create') }}"
                     class="border border-gray-200 hover:border-brand hover:text-brand px-5 py-3 rounded-xl font-semibold text-center transition-all duration-300">
-                        Crear nueva actividad
+                        Crear actividad
                     </a>
 
                 </div>
@@ -50,7 +50,7 @@
             </article>
 
             <!-- INSTALACIONES -->
-            <article class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+            <article class="flex flex-col bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
 
                 <div class="flex items-center justify-between mb-6">
                     <h2 class="text-2xl font-bold text-charcoal">
@@ -64,10 +64,10 @@
                     Administra las instalaciones deportivas y organiza su disponibilidad.
                 </p>
 
-                <div class="flex flex-col gap-3">
+                <div class="flex flex-col gap-3 mt-auto">
 
                     <a href="{{ route('instalaciones') }}"
-                    class="bg-brand hover:bg-brand-hover text-white px-5 py-3 rounded-xl font-bold text-center transition-all duration-300">
+                    class="bg-brand hover:bg-brand-hover text-white px-5 py-3 rounded-xl font-bold text-center transition-all duration-300 min-h-20 content-center">
                         Gestionar instalaciones
                     </a>
 
@@ -81,7 +81,7 @@
             </article>
 
             <!-- RESERVAS -->
-            <article class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+            <article class="flex flex-col bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
 
                 <div class="flex items-center justify-between mb-6">
                     <h2 class="text-2xl font-bold text-charcoal">
@@ -95,10 +95,10 @@
                     Gestiona la reserva de pistas o sesiones, bloqueando plazas para otros usuarios y consultando el historial de reservas.
                 </p>
 
-                <div class="flex flex-col gap-3">
+                <div class="flex flex-col gap-3 mt-auto">
 
                     <a href="#"
-                    class="bg-brand hover:bg-brand-hover text-white px-5 py-3 rounded-xl font-bold text-center transition-all duration-300">
+                    class="bg-brand hover:bg-brand-hover text-white px-5 py-3 rounded-xl font-bold text-center transition-all duration-300 min-h-20 content-center">
                         Gestionar reservas
                     </a>
 
