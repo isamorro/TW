@@ -6,7 +6,7 @@
 <!-- Removed duplicative header link -->
 @endsection
 
-            minlength="2" maxlength="40"
+@section('content')
 
 <div class="mb-8 text-center">
     <h1 class="text-3xl font-extrabold tracking-tight text-charcoal">Crear cuenta</h1>
@@ -14,7 +14,7 @@
 </div>
 
 @if ($errors->any())
-            maxlength="40"
+    @include('login.form-errors')
 @endif
 
 <form action="{{ route('register.store') }}" method="POST" class="space-y-4">
@@ -22,7 +22,8 @@
     <div>
         <label for="name" class="mb-1.5 block text-sm font-semibold text-charcoal">Nombre completo</label>
         <input type="text" id="name" name="name" value="{{ old('name') }}" placeholder="Tu nombre" required
-            minlength="8" maxlength="40"
+            autocomplete="name"
+            minlength="2" maxlength="40"
             class="block w-full rounded-xl border border-gray-200 bg-gray-50 py-3 px-4 text-charcoal placeholder:text-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand transition-all duration-300">
     </div>
     
@@ -31,12 +32,14 @@
         <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="correo@ejemplo.com" required
             autocomplete="email"
             minlength="8" maxlength="40"
+            class="block w-full rounded-xl border border-gray-200 bg-gray-50 py-3 px-4 text-charcoal placeholder:text-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand transition-all duration-300">
     </div>
 
     <div>
         <label for="password" class="mb-1.5 block text-sm font-semibold text-charcoal">Contraseña</label>
         <input type="password" id="password" name="password" placeholder="Mínimo 8 caracteres" required
             autocomplete="new-password"
+            minlength="8"
             class="block w-full rounded-xl border border-gray-200 bg-gray-50 py-3 px-4 text-charcoal placeholder:text-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand transition-all duration-300">
     </div>
 
@@ -44,6 +47,7 @@
         <label for="password_confirmation" class="mb-1.5 block text-sm font-semibold text-charcoal">Confirmar contraseña</label>
         <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Repite la contraseña" required
             autocomplete="new-password"
+            minlength="8"
             class="block w-full rounded-xl border border-gray-200 bg-gray-50 py-3 px-4 text-charcoal placeholder:text-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand transition-all duration-300">
     </div>
 

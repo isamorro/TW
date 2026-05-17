@@ -86,7 +86,7 @@
                                 {{ auth()->user()->name }}
                             </p>
                             <p class="text-sm text-brand font-semibold">
-                                {{ ucfirst(auth()->user()->role) }}
+                                {{ auth()->user()->role === 'admin' ? 'Administrador' : 'Usuario' }}
                             </p>
                         </div>
 
@@ -119,7 +119,7 @@
                                 {{ auth()->user()->name }}
                             </p>
                             <p class="text-xs text-brand font-semibold">
-                                {{ ucfirst(auth()->user()->role) }}
+                                {{ auth()->user()->role === 'admin' ? 'Administrador' : 'Usuario' }}
                             </p>
                         </div>
                     @endauth

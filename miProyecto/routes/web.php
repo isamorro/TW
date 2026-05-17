@@ -19,7 +19,13 @@ use App\Http\Controllers\SessionActivityController;
 
 // Rutas públicas
 
-Route::view('/', 'home')->name('home');
+Route::get('/', function () {
+    $installations = Installation::where('status', 'available')
+        ->orderBy('name')
+        ->get();
+
+    return view('home', compact('installations'));
+})->name('home');
 
 Route::view('/contacto', 'contacto')->name('contacto');
 

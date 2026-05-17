@@ -40,7 +40,7 @@
     </section>
 
     <!-- 3. Seccion "Nuestros Espacios" (Carrusel horizontal) -->
-    <section id="spaces" class="py-24 bg-gray-50 overflow-hidden">
+    <section id="spaces" class="py-24 pb-28 bg-gray-50 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="mb-12">
                 <h2 class="text-3xl md:text-4xl font-extrabold text-charcoal">Explora Nuestros <span class="text-brand">Espacios</span></h2>
@@ -48,63 +48,47 @@
             </div>
             
             <!-- Carrusel Swiper -->
-            <div class="swiper spaces-swiper !pb-12">
-                <div class="swiper-wrapper">
-                    <!-- Espacio 1 -->
-                    <div class="swiper-slide">
-                        <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl group h-full">
-                            <div class="h-48 overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=2070&auto=format&fit=crop" alt="Weightlifting" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                            </div>
-                            <div class="p-6">
-                                <h3 class="text-xl font-bold text-charcoal mb-2">Zona de Musculación</h3>
-                                <p class="text-charcoal-light text-sm">Pesos libres premium, racks y equipo de fuerza funcional para ganar músculo y potencia.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Espacio 2 -->
-                    <div class="swiper-slide">
-                        <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl group h-full">
-                            <div class="h-48 overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=2070&auto=format&fit=crop" alt="Cardio" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                            </div>
-                            <div class="p-6">
-                                <h3 class="text-xl font-bold text-charcoal mb-2">Zona de Cardio</h3>
-                                <p class="text-charcoal-light text-sm">Cintas de correr de alta gama y bicicletas con pantallas interactivas para ir a tope.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Espacio 3 -->
-                    <div class="swiper-slide">
-                        <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl group h-full">
-                            <div class="h-48 overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=2070&auto=format&fit=crop" alt="Cross Training" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                            </div>
-                            <div class="p-6">
-                                <h3 class="text-xl font-bold text-charcoal mb-2">Entrenamiento Funcional</h3>
-                                <p class="text-charcoal-light text-sm">Césped abierto, pesas rusas, cuerdas y cajones para entrenamientos intensos de cuerpo completo.</p>
+            <div class="swiper spaces-swiper pb-12! overflow-visible max-w-7xl mx-auto">
+                <div class="swiper-wrapper ">
+                    @forelse($installations as $installation)
+                        <a href="{{ route('instalaciones') }}" class="swiper-slide h-auto block">
+                            <article class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl group h-full flex flex-col">
+                                <div class="h-48 overflow-hidden relative">
+                                    @if($installation->image_path)
+                                        <img src="{{ asset($installation->image_path) }}" alt="{{ $installation->name }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                                    @else
+                                        <div class="w-full h-full bg-gray-100 flex items-center justify-center">
+                                            <i class="fa-solid fa-dumbbell text-5xl text-brand"></i>
+                                        </div>
+                                    @endif
+                                    <div class="absolute top-4 left-4">
+                                        <span class="inline-flex items-center rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-brand shadow-sm backdrop-blur">
+                                            Disponible
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="p-6 flex flex-1 flex-col">
+                                    <h3 class="text-xl font-bold text-charcoal mb-2">{{ $installation->name }}</h3>
+                                    <p class="text-charcoal-light text-sm leading-relaxed flex-1">{{ $installation->description }}</p>
+                                </div>
+                            </article>
+                        </a>
+                    @empty
+                        <div class="swiper-slide h-auto">
+                            <div class="bg-white rounded-xl shadow-md border border-gray-100 p-8 text-center h-full flex flex-col justify-center">
+                                <i class="fa-solid fa-building text-4xl text-gray-300 mb-4"></i>
+                                <h3 class="text-xl font-bold text-charcoal mb-2">No hay instalaciones disponibles</h3>
+                                <p class="text-charcoal-light text-sm">Cuando existan registros en la base de datos aparecerán aquí automáticamente.</p>
                             </div>
                         </div>
-                    </div>
-                    <!-- Espacio 4 -->
-                    <div class="swiper-slide">
-                        <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl group h-full">
-                            <div class="h-48 overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1549995546-87cb41aa98a4?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?q=80&w=2070&auto=format&fit=crop" alt="Yoga Studio" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                            </div>
-                            <div class="p-6">
-                                <h3 class="text-xl font-bold text-charcoal mb-2">Cuerpo y Mente</h3>
-                                <p class="text-charcoal-light text-sm">Un estudio tranquilo y bien iluminado para rutinas de Yoga, Pilates y estiramientos.</p>
-                            </div>
-                        </div>
-                    </div>
+                    @endforelse
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
         </div>
     </section>
 
-    <!-- 4. Seccion "Nuestros Clubes" (Grid vertical) -->
+    <!-- 4. Seccion "Nuestros Clubes" (Grid vertical) Seccion Estatica -->
     <section id="clubs" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl md:text-4xl font-extrabold text-charcoal mb-4">Encuentra un Club <span class="text-brand">Cerca de Ti</span></h2>
@@ -112,7 +96,7 @@
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Tarjeta de club -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl flex flex-col h-96 group">
+                <a href="{{ route('register') }}" class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl flex flex-col h-96 group">
                     <div class="h-2/3 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1632247492667-b627d2edc4f6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?q=80&w=2070&auto=format&fit=crop" alt="Cadiz" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                     </div>
@@ -123,9 +107,9 @@
                             <span class="text-sm bg-green-100 px-3 py-1 rounded-full text-brand">2 clubes disponibles</span>
                         </div>
                     </div>
-                </div>
+                </a>
                 <!-- Tarjeta de club -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl flex flex-col h-96 group">
+                <a href="{{ route('register') }}" class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl flex flex-col h-96 group">
                     <div class="h-2/3 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1617889546484-0ddbe676ed81?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?q=80&w=2020&auto=format&fit=crop" alt="Toledo" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                     </div>
@@ -136,9 +120,9 @@
                             <span class="text-sm bg-green-100 px-3 py-1 rounded-full text-brand">1 clubes disponibles</span>
                         </div>
                     </div>
-                </div>
+                </a>
                 <!-- Tarjeta de club -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl flex flex-col h-96 group">
+                <a href="{{ route('register') }}" class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl flex flex-col h-96 group">
                     <div class="h-2/3 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1743244410824-339ef283da22?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?q=80&w=2070&auto=format&fit=crop" alt="New York" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                     </div>
@@ -149,9 +133,9 @@
                             <span class="text-sm bg-green-100 px-3 py-1 rounded-full text-brand">2 clubes disponibles</span>
                         </div>
                     </div>
-                </div>
+                </a>
                 <!-- Tarjeta de club -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl flex flex-col h-96 group">
+                <a href="{{ route('register') }}" class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl flex flex-col h-96 group">
                     <div class="h-2/3 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1654802966959-35be231117ae?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?q=80&w=1964&auto=format&fit=crop" alt="Tenerife" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                     </div>
@@ -162,9 +146,8 @@
                             <span class="text-sm bg-green-100 px-3 py-1 rounded-full text-brand">3 clubes disponibles</span>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
-            
         </div>
     </section>
 
@@ -180,9 +163,6 @@
                     </h2>
                     <p class="text-charcoal-light font-medium text-lg mb-4">
                         Obtén rutinas personalizadas, registra tus récords y sincroniza tus dispositivos. Actualiza a Premium para entrenamiento personalizado desde tu teléfono.
-                    </p>
-                    <p class="text-sm text-charcoal-light italic mb-6">
-                        Aviso: nuestra app está en desarrollo. Lanzamiento pronto (o no).
                     </p>
                     <div class="flex flex-wrap gap-4">
                         <button
@@ -207,7 +187,7 @@
                 <!-- Imagen derecha -->
                 <div class="md:w-1/2 h-64 md:h-auto w-full relative flex items-center justify-center p-8">
                     <!-- Marcador visual del mockup de la app -->
-                    <div class="relative w-64 h-[28rem] bg-white rounded-3xl shadow-2xl border-[8px] border-charcoal overflow-hidden transform rotate-3 hover:rotate-0 transition-transform duration-500">
+                    <div class="relative w-64 h-112 bg-white rounded-3xl shadow-2xl border-8 border-charcoal overflow-hidden transform rotate-3 hover:rotate-0 transition-transform duration-500">
                         <!-- UI del mockup de la app -->
                         <div class="h-20 bg-brand p-4 flex items-end">
                             <div class="w-3/4 h-4 bg-white/30 rounded"></div>
