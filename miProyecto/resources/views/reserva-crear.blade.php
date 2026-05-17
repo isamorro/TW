@@ -1,12 +1,11 @@
 @extends('layouts.app')
-
-@section('title', 'Confirmar Reserva')
-
+@section('title', 'SportsCenter -Confirmar Reserva')
 @section('content')
+
 <!-- CABECERA -->
 <div class="mb-8">
     <h1 class="text-4xl font-bold mb-2">Confirmar reserva</h1>
-    <p class="text-gray-600">
+    <p class="text-gray-700">
         Revisa los detalles antes de confirmar.
     </p>
 </div>
@@ -27,21 +26,21 @@
     <h2 class="text-2xl font-semibold mb-1">
         {{ $session->activity->name }}
     </h2>
-    <p class="text-gray-600 mb-6">
+    <p class="text-gray-700 mb-6">
         <i class="fa-solid fa-location-dot mr-1 text-brand"></i>
         {{ $session->installation->name }}
     </p>
 
     <div class="grid sm:grid-cols-2 gap-4 mb-6">
         <div>
-            <p class="text-sm text-gray-500 uppercase font-semibold mb-1">Fecha</p>
+            <p class="text-sm text-gray-700 uppercase font-semibold mb-1">Fecha</p>
             <p class="text-lg font-medium">
                 <i class="fa-solid fa-calendar mr-1 text-brand"></i>
                 {{ $session->date->format('d/m/Y') }}
             </p>
         </div>
         <div>
-            <p class="text-sm text-gray-500 uppercase font-semibold mb-1">Hora</p>
+            <p class="text-sm text-gray-700 uppercase font-semibold mb-1">Hora</p>
             <p class="text-lg font-medium">
                 <i class="fa-solid fa-clock mr-1 text-brand"></i>
                 {{ \Carbon\Carbon::parse($session->start_time)->format('H:i') }}
@@ -52,10 +51,10 @@
     </div>
 
     <div class="border-t border-gray-200 pt-4">
-        <p class="text-sm text-gray-500 uppercase font-semibold mb-1">Plazas disponibles</p>
+        <p class="text-sm text-gray-700 uppercase font-semibold mb-1">Plazas disponibles</p>
         <p class="text-2xl font-bold {{ $plazasLibres > 0 ? 'text-brand' : 'text-red-600' }}">
             {{ $plazasLibres }}
-            <span class="text-base font-medium text-gray-500">de {{ $session->activity->capacity }}</span>
+            <span class="text-base font-medium text-gray-700">de {{ $session->activity->capacity }}</span>
         </p>
     </div>
 </article>

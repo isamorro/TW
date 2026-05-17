@@ -1,12 +1,11 @@
 @extends('layouts.app')
-
-@section('title', 'Mis Reservas')
-
+@section('title', 'SportsCenter - Mis Reservas')
 @section('content')
+
 <!-- CABECERA -->
 <div class="mb-8">
     <h1 class="text-4xl font-bold mb-2">Mis reservas</h1>
-    <p class="text-gray-600">
+    <p class="text-gray-700">
         Aquí puedes consultar y gestionar tus reservas activas y pasadas.
     </p>
 </div>
@@ -33,7 +32,7 @@
 @if ($reservations->isEmpty())
     <div class="bg-white rounded-xl shadow p-8 border text-center">
         <i class="fa-solid fa-calendar-xmark text-5xl text-gray-300 mb-4"></i>
-        <p class="text-gray-600 mb-6">No tienes ninguna reserva todavía.</p>
+        <p class="text-gray-700 mb-6">No tienes ninguna reserva todavía.</p>
         <a href="{{ route('catalogo') }}"
            class="inline-flex items-center gap-2 bg-brand hover:bg-brand-hover text-white px-5 py-3 rounded-xl font-bold shadow-md transition-all duration-300 hover:scale-105">
             <i class="fa-solid fa-magnifying-glass"></i>
@@ -65,7 +64,7 @@
                 <h2 class="text-2xl font-semibold mb-1 pr-24">
                     {{ $reservation->session->activity->name }}
                 </h2>
-                <p class="text-gray-600 mb-4">
+                <p class="text-gray-700 mb-4">
                     <i class="fa-solid fa-location-dot mr-1 text-brand"></i>
                     {{ $reservation->session->installation->name }}
                 </p>

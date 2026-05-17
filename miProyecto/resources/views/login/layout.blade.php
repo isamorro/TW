@@ -57,7 +57,8 @@
         <div class="relative w-full max-w-md z-10">
             <div class="mb-8 text-center flex flex-col items-center">
                 <div class="flex items-center mb-4 bg-white p-5 rounded-xl shadow-lg">
-                    <img src="{{ asset('logos/Icono-SportsCenter.png') }}" alt="SportsCenter Icon" class="h-9 w-auto">                </div>
+                    <img src="{{ asset('logos/Icono-SportsCenter.png') }}" alt="SportsCenter Icon" class="h-9 w-auto">                
+                </div>
                 @yield('header-action')
             </div>
 

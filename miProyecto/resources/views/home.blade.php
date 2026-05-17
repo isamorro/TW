@@ -1,7 +1,5 @@
 @extends('layouts.app')
-
-@section('title', 'Centro Deportivo | Entrena como un atleta')
-
+@section('title', 'SportsCenter - Inicio')
 @section('main-class', 'flex-grow w-full')
 
 @push('head')
@@ -187,12 +185,23 @@
                         Aviso: nuestra app está en desarrollo. Lanzamiento pronto (o no).
                     </p>
                     <div class="flex flex-wrap gap-4">
-                        <a href="#" class="flex items-center justify-center bg-brand hover:bg-brand-hover text-white px-6 py-3 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-md">
-                            <i class="fa-brands fa-apple text-xl mr-2"></i> App Store
-                        </a>
-                        <a href="#" class="flex items-center justify-center bg-charcoal hover:bg-black text-white px-6 py-3 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-md">
-                            <i class="fa-brands fa-google-play text-xl mr-2"></i> Google Play
-                        </a>
+                        <button
+                            type="button"
+                            disabled
+                            class="flex items-center justify-center bg-brand text-white px-6 py-3 rounded-xl font-bold shadow-md opacity-70 cursor-not-allowed"
+                            aria-label="App Store próximamente">
+                            <i class="fa-brands fa-apple text-xl mr-2" aria-hidden="true"></i>
+                            App Store próximamente
+                        </button>
+
+                        <button
+                            type="button"
+                            disabled
+                            class="flex items-center justify-center bg-charcoal text-white px-6 py-3 rounded-xl font-bold shadow-md opacity-70 cursor-not-allowed"
+                            aria-label="Google Play próximamente">
+                            <i class="fa-brands fa-google-play text-xl mr-2" aria-hidden="true"></i>
+                            Google Play próximamente
+                        </button>
                     </div>
                 </div>
                 <!-- Imagen derecha -->

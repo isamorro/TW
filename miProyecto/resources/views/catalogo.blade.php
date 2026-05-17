@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'SportsCenter - Catálogo')
 @section('content')
 
 <!-- CABECERA -->
@@ -10,7 +10,7 @@
             Catálogo de clases
         </h1>
 
-        <p class="text-gray-600">
+        <p class="text-gray-700">
             Consulta las actividades disponibles en nuestro centro deportivo.
         </p>
     </div>
@@ -41,38 +41,26 @@
             <!-- BOTONES ADMIN -->
             @auth
                 @if(auth()->user()->role === 'admin')
-
                     <div class="absolute top-4 right-4 flex items-center gap-2">
-
                         <!-- EDITAR -->
                         <a href="{{ route('admin.activities.edit', $activity) }}"
                            class="bg-blue-100 hover:bg-blue-200 text-blue-700 p-2 rounded-lg transition-colors duration-300"
-                           aria-label="Editar actividad">
-
+                           aria-label="Editar actividad {{ $activity->name }}">
                             <i class="fa-solid fa-pen-to-square"></i>
-
                         </a>
-
                         <!-- ELIMINAR -->
                         <form action="{{ route('admin.activities.destroy', $activity) }}"
                               method="POST"
                               onsubmit="return confirm('¿Seguro que quieres eliminar esta actividad?')">
-
                             @csrf
                             @method('DELETE')
-
                             <button type="submit"
                                     class="bg-red-100 hover:bg-red-200 text-red-700 p-2 rounded-lg transition-colors duration-300"
-                                    aria-label="Eliminar actividad">
-
+                                    aria-label="Eliminar actividad {{ $activity->name }}">
                                 <i class="fa-solid fa-trash"></i>
-
                             </button>
-
                         </form>
-
                     </div>
-
                 @endif
             @endauth
 
@@ -108,7 +96,7 @@
 
     @empty
 
-        <p class="text-gray-600">
+        <p class="text-gray-700">
             Todavía no hay actividades disponibles.
         </p>
 

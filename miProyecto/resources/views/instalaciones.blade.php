@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Instalaciones')
+@section('title', 'SportsCenter - Instalaciones')
 
 @section('content')
 
@@ -12,7 +12,7 @@
             Instalaciones
         </h1>
 
-        <p class="text-gray-600">
+        <p class="text-gray-700">
             Descubre todas las instalaciones deportivas disponibles en SportsCenter.
         </p>
     </div>
@@ -51,7 +51,7 @@
                         <!-- EDITAR -->
                         <a href="{{ route('admin.installations.edit', $installation) }}"
                            class="bg-blue-100 hover:bg-blue-200 text-blue-700 p-2 rounded-lg transition-colors duration-300"
-                           aria-label="Editar instalación">
+                           aria-label="Editar instalación {{ $installation->name }}">
 
                             <i class="fa-solid fa-pen-to-square"></i>
 
@@ -67,8 +67,7 @@
 
                             <button type="submit"
                                     class="bg-red-100 hover:bg-red-200 text-red-700 p-2 rounded-lg transition-colors duration-300"
-                                    aria-label="Eliminar instalación">
-
+                                    aria-label="Eliminar instalación {{ $installation->name }}">
                                 <i class="fa-solid fa-trash"></i>
 
                             </button>
@@ -115,7 +114,7 @@
 
                 </div>
 
-                <p class="text-gray-600 leading-relaxed">
+                <p class="text-gray-700 leading-relaxed">
                     {{ $installation->description }}
                 </p>
 
@@ -135,7 +134,7 @@
                     No hay instalaciones disponibles
                 </h2>
 
-                <p class="text-gray-600">
+                <p class="text-gray-700">
                     Todavía no se han añadido instalaciones al sistema.
                 </p>
 

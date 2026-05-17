@@ -10,7 +10,7 @@
                 Panel de Administración
             </h1>
 
-            <p class="text-gray-600 text-lg">
+            <p class="text-gray-700 text-lg">
                 Desde este panel el administrador puede gestionar las actividades, instalaciones y reservas del centro deportivo.
             </p>
         </div>
@@ -29,7 +29,7 @@
                     <i class="fa-solid fa-dumbbell text-3xl text-brand"></i>
                 </div>
 
-                <p class="text-gray-600 mb-6">
+                <p class="text-gray-700 mb-6">
                     Crea, modifica y elimina las actividades disponibles en SportsCenter.
                 </p>
 
@@ -60,7 +60,7 @@
                     <i class="fa-solid fa-building text-3xl text-brand"></i>
                 </div>
 
-                <p class="text-gray-600 mb-6">
+                <p class="text-gray-700 mb-6">
                     Administra las instalaciones deportivas y organiza su disponibilidad.
                 </p>
 
@@ -91,7 +91,7 @@
                     <i class="fa-solid fa-calendar-check text-3xl text-brand"></i>
                 </div>
 
-                <p class="text-gray-600 mb-6">
+                <p class="text-gray-700 mb-6">
                     Gestiona la reserva de pistas o sesiones, bloqueando plazas para otros usuarios y consultando el historial de reservas.
                 </p>
 

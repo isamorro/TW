@@ -1,6 +1,7 @@
 @extends('layouts.app')
-
+@section('title', 'SportsCenter - Contacto')
 @section('content')
+
 <section class="max-w-5xl mx-auto px-4 py-16">
 
     <div class="text-center mb-10">
@@ -12,7 +13,7 @@
             Equipo de desarrollo
         </h1>
 
-        <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+        <p class="text-gray-700 text-lg max-w-2xl mx-auto">
             Proyecto desarrollado para la gestión de actividades, instalaciones y reservas de un centro deportivo.
         </p>
     </div>
@@ -28,7 +29,7 @@
                 Carlos Hoyo Liddle
             </h2>
 
-            <p class="text-sm text-gray-500 mt-2">
+            <p class="text-sm text-gray-700 mt-2">
                 Desarrollador
             </p>
         </article>
@@ -42,7 +43,7 @@
                 David Martin Cerezo
             </h2>
 
-            <p class="text-sm text-gray-500 mt-2">
+            <p class="text-sm text-gray-700 mt-2">
                 Desarrollador
             </p>
         </article>
@@ -56,7 +57,7 @@
                 Leandro Mazuecos Martín
             </h2>
 
-            <p class="text-sm text-gray-500 mt-2">
+            <p class="text-sm text-gray-700 mt-2">
                 Desarrollador
             </p>
         </article>
@@ -70,7 +71,7 @@
                 Isabel Morro Tabares
             </h2>
 
-            <p class="text-sm text-gray-500 mt-2">
+            <p class="text-sm text-gray-700 mt-2">
                 Desarrolladora
             </p>
         </article>

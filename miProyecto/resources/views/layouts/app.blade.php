@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>@yield('title', 'Centro Deportivo') | SportsCenter</title>
+    <title>@yield('title', 'SportsCenter')</title>
     <link rel="icon" type="image/png" href="{{ asset('logos/logo-SportsCenter.png') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,6 +43,10 @@
 </head>
 
 <body class="font-sans antialiased bg-gray-50 text-charcoal flex flex-col min-h-screen relative pt-20">
+    <a href="#main-content"
+    class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:bg-white focus:text-charcoal focus:px-4 focus:py-2 focus:rounded-lg focus:shadow">
+        Saltar al contenido principal
+    </a>
 
     <!-- HEADER -->
     <header class="fixed w-full top-0 z-50 bg-white shadow-sm transition-all duration-300">
@@ -120,8 +124,9 @@
                         </div>
                     @endauth
 
-                    <button id="mobile-menu-btn" class="text-charcoal focus:outline-none hover:text-brand transition-colors">
-                        <i class="fa-solid fa-bars text-2xl"></i>
+                    <button id="mobile-menu-btn" type="button" aria-label="Abrir menú de navegación" aria-controls="mobile-menu" aria-expanded="false"
+                        class="text-charcoal focus:outline-none hover:text-brand transition-colors">
+                        <i class="fa-solid fa-bars text-2xl" aria-hidden="true"></i>
                     </button>
 
                 </div>
@@ -164,24 +169,23 @@
     </header>
 
     <!-- CONTENIDO -->
-    <main class="@yield('main-class', 'flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 overflow-visible')">
+    <main id="main-content" class="@yield('main-class', 'flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 overflow-visible')">
 
         @isset($activities)
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start overflow-visible">
 
                 <!-- MENÚ MÓVIL ACTIVIDADES -->
                 <div class="lg:hidden mb-6">
-                    <button id="activities-toggle"
-                            type="button"
-                            class="w-full flex items-center justify-between bg-white rounded-xl shadow p-4 border">
+                    <button id="activities-toggle" type="button" aria-label="Mostrar u ocultar listado de actividades" aria-controls="activities-menu" aria-expanded="false"
+                        class="w-full flex items-center justify-between bg-white rounded-xl shadow p-4 border">
 
                         <span class="flex items-center gap-3 text-lg font-semibold">
-                            <i class="fa-solid fa-dumbbell text-brand"></i>
+                            <i class="fa-solid fa-dumbbell text-brand" aria-hidden="true"></i>
                             Actividades
                         </span>
 
                         <i id="activities-arrow"
-                           class="fa-solid fa-chevron-down transition-transform duration-300"></i>
+                           class="fa-solid fa-chevron-down transition-transform duration-300" aria-hidden="true"></i>
                     </button>
 
                     <div id="activities-menu"
@@ -207,7 +211,7 @@
                     <div class="bg-white rounded-xl shadow p-6 border">
 
                         <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
-                            <i class="fa-solid fa-dumbbell text-brand"></i>
+                            <i class="fa-solid fa-dumbbell text-brand" aria-hidden="true"></i>
                             Actividades
                         </h2>
 
@@ -248,16 +252,16 @@
                     <img src="{{ asset('logos/Icono-SportsCenter.png') }}" alt="SportsCenter Icon" class="h-10 sm:h-16 md:h-20 w-auto grayscale brightness-200">
                 </div>
 
-                <a href="{{ route('contacto') }}" class="text-gray-300 hover:text-brand transition-colors duration-300 font-medium">
+                <a href="{{ route('contacto') }}" class="text-white hover:text-green-300 transition-colors duration-300 font-medium">
                     Contacto
                 </a>
             </div>
 
             <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row items-center justify-between">
-                <p class="text-gray-400 text-sm md:text-center">
+                <p class="text-gray-200 text-sm md:text-center">
                     © {{ date('Y') }} SportsCenter - Todos los derechos reservados
                 </p>
-                <a href="#" class="text-gray-300 hover:text-brand transition-colors duration-300 text-sm mt-3 md:mt-0">
+                <a href="#" class="text-white hover:text-green-300 transition-colors duration-300 text-sm mt-3 md:mt-0">
                     Cómo se hizo
                 </a>
             </div>

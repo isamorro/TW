@@ -1,8 +1,7 @@
 @extends('layouts.app')
-
-@section('title', $activity->name)
-
+@section('title', 'SportsCenter - ' . $activity->name)
 @section('content')
+
 <article class="max-w-4xl mx-auto bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
 
     @if($activity->image_path)
@@ -55,7 +54,7 @@
             @endphp
 
             @if ($sesionesFuturas->isEmpty())
-                <p class="text-gray-600">No hay sesiones programadas para esta actividad.</p>
+                <p class="text-gray-700">No hay sesiones programadas para esta actividad.</p>
             @else
                 <div class="grid grid-cols-1 gap-3">
                     @foreach ($sesionesFuturas as $session)
@@ -68,7 +67,7 @@
                                     <i class="fa-solid fa-clock mr-1 text-brand"></i>
                                     {{ \Carbon\Carbon::parse($session->start_time)->format('H:i') }}–{{ \Carbon\Carbon::parse($session->end_time)->format('H:i') }}
                                 </p>
-                                <p class="text-sm text-gray-600 mt-1">
+                                <p class="text-sm text-gray-700 mt-1">
                                     <i class="fa-solid fa-location-dot mr-1 text-brand"></i>
                                     {{ $session->installation->name }}
                                     <span class="mx-1 text-gray-400">·</span>
