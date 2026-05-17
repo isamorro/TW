@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>@yield('title', 'Centro Deportivo') | SportsCenter</title>
-    <link rel="icon" type="image/png" href="{{ asset('logo-sportsCenter.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('logos/logo-SportsCenter.png') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,8 +53,8 @@
                 <!-- LOGO -->
                 <div class="flex items-center cursor-pointer min-w-0">
                     <a href="{{ route('home') }}" class="flex items-center text-charcoal min-w-0">
-                        <img src="{{ asset('logo-sportsCenter.png') }}" alt="SportsCenter Logo" class="h-8 sm:h-9 w-auto mr-1 sm:mr-2 shrink-0">
-                        <img src="{{ asset('icono-sportsCenter.png') }}" alt="SportsCenter Icon" class="hidden sm:block h-12 w-auto shrink-0">
+                        <img src="{{ asset('logos/logo-SportsCenter.png') }}" alt="SportsCenter Logo" class="h-8 sm:h-9 w-auto mr-1 sm:mr-2 shrink-0">
+                        <img src="{{ asset('logos/Icono-SportsCenter.png') }}" alt="SportsCenter Icon" class="hidden sm:block h-12 w-auto shrink-0">
                     </a>
                 </div>
 
@@ -244,12 +244,12 @@
             <div class="flex flex-col md:flex-row justify-between items-center mb-8">
 
                 <div class="flex items-center mb-6 md:mb-0">
-                    <img src="{{ asset('logo-sportsCenter.png') }}" alt="SportsCenter Logo" class="h-6 sm:h-9 md:h-12 w-auto mr-2 grayscale brightness-200">
-                    <img src="{{ asset('icono-sportsCenter.png') }}" alt="SportsCenter Icon" class="h-10 sm:h-16 md:h-20 w-auto grayscale brightness-200">
+                    <img src="{{ asset('logos/logo-SportsCenter.png') }}" alt="SportsCenter Logo" class="h-6 sm:h-9 md:h-12 w-auto mr-2 grayscale brightness-200">
+                    <img src="{{ asset('logos/Icono-SportsCenter.png') }}" alt="SportsCenter Icon" class="h-10 sm:h-16 md:h-20 w-auto grayscale brightness-200">
                 </div>
 
                 <a href="{{ route('contacto') }}" class="text-gray-300 hover:text-brand transition-colors duration-300 font-medium">
-                    Contacta con nosotros
+                    Contacto
                 </a>
             </div>
 

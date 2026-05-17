@@ -1,34 +1,25 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
 use App\Models\Activity;
 use App\Models\Installation;
-use App\Models\Reservation;
+
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ContactController;
 use App\Http\Controllers\InstallationController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\SessionActivityController;
 
-// =============================
 // Rutas públicas
-// =============================
-Route::get('/', function () {
-    return view('home');
-});
 
-Route::get('/contacto', function () {
-    return view('contacto');
-})->name('contacto');
+Route::view('/', 'home')->name('home');
 
-Route::post('/contacto', [ContactController::class, 'send'])->name('contacto.send');
-
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
+Route::view('/contacto', 'contacto')->name('contacto');
 
 Route::get('/catalogo', function () {
     $activities = Activity::orderBy('name')->get();
@@ -38,7 +29,7 @@ Route::get('/catalogo', function () {
 Route::get('/catalogo/{activity}', function (Activity $activity) {
     $activity->load([
         'sessions.installation',
-        'sessions.reservations'
+        'sessions.reservations',
     ]);
     $activities = Activity::orderBy('name')->get();
     return view('actividad-detalle', compact('activity', 'activities'));
@@ -49,9 +40,7 @@ Route::get('/instalaciones', function () {
     return view('instalaciones', compact('installations'));
 })->name('instalaciones');
 
-// =============================
-// Rutas de autenticación
-// =============================
+// Autenticación
 
 Route::get('/login', function () {
     return view('login.login');
@@ -72,40 +61,67 @@ Route::get('/register', function () {
     return view('login.register');
 })->name('register');
 
-Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+Route::post('/register', [RegisterController::class, 'store'])
+    ->name('register.store');
 
 Route::view('/profile', 'login.profile')
     ->middleware('auth')
     ->name('profile');
 
-// =============================
-// Reservas del usuario (autenticado)
-// =============================
+// Reservas de usuario
 
 Route::middleware('auth')->group(function () {
-    Route::get('/usuario/reservas', [ReservationController::class, 'index'])->name('reservas');
-    Route::get('/reservar/{session}', [ReservationController::class, 'create'])->name('reservas.create');
-    Route::post('/reservar', [ReservationController::class, 'store'])->name('reservas.store');
-    Route::delete('/usuario/reservas/{reservation}', [ReservationController::class, 'destroy'])->name('reservas.destroy');
+    Route::get('/usuario/reservas', [ReservationController::class, 'index'])
+        ->name('reservas');
+
+    Route::get('/reservar/{session}', [ReservationController::class, 'create'])
+        ->name('reservas.create');
+
+    Route::post('/reservar', [ReservationController::class, 'store'])
+        ->name('reservas.store');
+
+    Route::delete('/usuario/reservas/{reservation}', [ReservationController::class, 'destroy'])
+        ->name('reservas.destroy');
 });
 
-// =============================
-// Rutas de administración
-// =============================
+// Administración
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/panel', [AdminController::class, 'index'])->name('admin.panel');
-    Route::get('/admin/activities', [ActivityController::class, 'adminList'])->name('admin.activities.index');
+    Route::get('/admin/panel', [AdminController::class, 'index'])
+        ->name('admin.panel');
 
-    Route::resource('/admin/activities', ActivityController::class)
-        ->except(['index'])
-        ->names('admin.activities');
+    Route::get('/admin/activities/create', [ActivityController::class, 'create'])
+        ->name('admin.activities.create');
 
-    Route::resource('/admin/installations', InstallationController::class)
-        ->names('admin.installations');
+    Route::post('/admin/activities', [ActivityController::class, 'store'])
+        ->name('admin.activities.store');
+
+    Route::get('/admin/activities/{activity}/edit', [ActivityController::class, 'edit'])
+        ->name('admin.activities.edit');
+
+    Route::put('/admin/activities/{activity}', [ActivityController::class, 'update'])
+        ->name('admin.activities.update');
+
+    Route::delete('/admin/activities/{activity}', [ActivityController::class, 'destroy'])
+        ->name('admin.activities.destroy');
+
+    Route::get('/admin/installations/create', [InstallationController::class, 'create'])
+        ->name('admin.installations.create');
+
+    Route::post('/admin/installations', [InstallationController::class, 'store'])
+        ->name('admin.installations.store');
+
+    Route::get('/admin/installations/{installation}/edit', [InstallationController::class, 'edit'])
+        ->name('admin.installations.edit');
+
+    Route::put('/admin/installations/{installation}', [InstallationController::class, 'update'])
+        ->name('admin.installations.update');
+
+    Route::delete('/admin/installations/{installation}', [InstallationController::class, 'destroy'])
+        ->name('admin.installations.destroy');
 
     Route::get('/admin/reservations', [ReservationController::class, 'adminIndex'])
-    ->name('admin.reservations.index');
+        ->name('admin.reservations.index');
 
     Route::get('/admin/reservations/history', [ReservationController::class, 'adminHistory'])
         ->name('admin.reservations.history');
@@ -113,9 +129,18 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/admin/reservations/{reservation}', [ReservationController::class, 'destroy'])
         ->name('admin.reservations.destroy');
 
-    Route::resource('/admin/sessions', SessionActivityController::class)
-        ->names('admin.sessions');
+    Route::get('/admin/sessions/create', [SessionActivityController::class, 'create'])
+        ->name('admin.sessions.create');
 
-    Route::resource('/admin/sessions', SessionActivityController::class)
-    ->names('admin.sessions');
+    Route::post('/admin/sessions', [SessionActivityController::class, 'store'])
+        ->name('admin.sessions.store');
+
+    Route::get('/admin/sessions/{session}/edit', [SessionActivityController::class, 'edit'])
+        ->name('admin.sessions.edit');
+
+    Route::put('/admin/sessions/{session}', [SessionActivityController::class, 'update'])
+        ->name('admin.sessions.update');
+
+    Route::delete('/admin/sessions/{session}', [SessionActivityController::class, 'destroy'])
+        ->name('admin.sessions.destroy');
 });

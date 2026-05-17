@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Acceso | SportsCenter')</title>
-    <link rel="icon" type="image/png" href="{{ asset('logo-sportsCenter.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('logos/logo-SportsCenter.png') }}">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,7 +57,7 @@
         <div class="relative w-full max-w-md z-10">
             <div class="mb-8 text-center flex flex-col items-center">
                 <div class="flex items-center mb-4 bg-white p-5 rounded-xl shadow-lg">
-                    <img src="{{ asset('icono-sportsCenter.png') }}" alt="SportsCenter Icon" class="h-9 w-auto">                </div>
+                    <img src="{{ asset('logos/Icono-SportsCenter.png') }}" alt="SportsCenter Icon" class="h-9 w-auto">                </div>
                 @yield('header-action')
             </div>
 

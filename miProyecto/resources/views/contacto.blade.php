@@ -1,31 +1,81 @@
 @extends('layouts.app')
+
 @section('content')
-<div class="max-w-2xl mx-auto py-12 px-4">
-    <h1 class="text-4xl font-bold text-charcoal mb-6">Contacto</h1>
-    
-    <form action="{{ route('contacto.send') }}" method="POST" class="bg-white p-8 rounded-2xl shadow-lg space-y-4">
-        @csrf
-        <div>
-            <label class="block font-bold mb-1">
-                Nombre
-            </label>
-            <input type="text" name="name" required class="w-full border rounded-xl p-3">
-        </div>
-        <div>
-            <label class="block font-bold mb-1">
-                Correo Electrónico
-            </label>
-            <input type="email" name="email" required class="w-full border rounded-xl p-3">
-        </div>
-        <div>
-            <label class="block font-bold mb-1">
-                Mensaje
-            </label>
-            <textarea name="message" required rows="5" class="w-full border rounded-xl p-3"></textarea>
-        </div>
-        <button type="submit" class="w-full bg-brand text-white font-bold py-3 rounded-xl hover:bg-brand-hover transition-colors">
-            Enviar Mensaje
-        </button>
-    </form>
-</div>
+<section class="max-w-5xl mx-auto px-4 py-16">
+
+    <div class="text-center mb-10">
+        <span class="inline-block bg-green-100 text-brand font-bold px-4 py-2 rounded-full mb-4">
+            SportsCenter
+        </span>
+
+        <h1 class="text-4xl md:text-5xl font-extrabold text-charcoal mb-4">
+            Equipo de desarrollo
+        </h1>
+
+        <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+            Proyecto desarrollado para la gestión de actividades, instalaciones y reservas de un centro deportivo.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <article class="bg-white rounded-2xl shadow-md border border-gray-100 p-6 text-center hover:shadow-xl transition-all">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-brand text-white flex items-center justify-center text-2xl font-extrabold">
+                C
+            </div>
+
+            <h2 class="text-lg font-bold text-charcoal">
+                Carlos Hoyo Liddle
+            </h2>
+
+            <p class="text-sm text-gray-500 mt-2">
+                Desarrollador
+            </p>
+        </article>
+
+        <article class="bg-white rounded-2xl shadow-md border border-gray-100 p-6 text-center hover:shadow-xl transition-all">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-brand text-white flex items-center justify-center text-2xl font-extrabold">
+                D
+            </div>
+
+            <h2 class="text-lg font-bold text-charcoal">
+                David Martin Cerezo
+            </h2>
+
+            <p class="text-sm text-gray-500 mt-2">
+                Desarrollador
+            </p>
+        </article>
+
+        <article class="bg-white rounded-2xl shadow-md border border-gray-100 p-6 text-center hover:shadow-xl transition-all">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-brand text-white flex items-center justify-center text-2xl font-extrabold">
+                L
+            </div>
+
+            <h2 class="text-lg font-bold text-charcoal">
+                Leandro Mazuecos Martín
+            </h2>
+
+            <p class="text-sm text-gray-500 mt-2">
+                Desarrollador
+            </p>
+        </article>
+
+        <article class="bg-white rounded-2xl shadow-md border border-gray-100 p-6 text-center hover:shadow-xl transition-all">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-brand text-white flex items-center justify-center text-2xl font-extrabold">
+                I
+            </div>
+
+            <h2 class="text-lg font-bold text-charcoal">
+                Isabel Morro Tabares
+            </h2>
+
+            <p class="text-sm text-gray-500 mt-2">
+                Desarrolladora
+            </p>
+        </article>
+
+    </div>
+
+</section>
 @endsection

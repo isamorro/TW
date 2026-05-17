@@ -12,19 +12,7 @@ class SessionActivityController extends Controller
 {
     public function index()
     {
-        $activities = Activity::with([
-                'sessions.installation',
-                'sessions.reservations'
-            ])
-            ->orderBy('name')
-            ->get();
-
-        $sessions = SessionActivity::with(['activity', 'installation'])
-            ->orderBy('date')
-            ->orderBy('start_time')
-            ->get();
-
-        return view('catalogo', compact('activities', 'sessions'));
+        return redirect()->route('catalogo');
     }
 
     public function edit(SessionActivity $session)
@@ -47,17 +35,13 @@ class SessionActivityController extends Controller
         ]);
 
         $session->update($validated);
-
-        return redirect()->route('admin.sessions.index')
-            ->with('success', 'Horario actualizado correctamente.');
+        return redirect()->route('admin.sessions.index')->with('success', 'Horario actualizado correctamente.');
     }
 
     public function destroy(SessionActivity $session)
     {
         $session->delete();
-
-        return redirect()->route('admin.sessions.index')
-            ->with('success', 'Horario eliminado correctamente.');
+        return redirect()->route('admin.sessions.index')->with('success', 'Horario eliminado correctamente.');  
     }
 
     public function create(Request $request)

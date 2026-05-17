@@ -21,11 +21,8 @@
 
             <a href="{{ route('admin.activities.create') }}"
                class="inline-flex items-center gap-2 bg-brand hover:bg-brand-hover text-white px-5 py-3 rounded-xl font-bold shadow-md transition-all duration-300 hover:scale-105">
-
                 <i class="fa-solid fa-plus"></i>
-
                 Nueva actividad
-
             </a>
 
         @endif

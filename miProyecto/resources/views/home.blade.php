@@ -167,11 +167,6 @@
                 </div>
             </div>
             
-            <div class="mt-12">
-                <a href="#" class="inline-block border-2 border-brand text-brand hover:bg-brand hover:text-white text-lg px-8 py-3 rounded-full font-bold transition-all duration-300 hover:shadow-lg">
-                    Ver todas las ubicaciones
-                </a>
-            </div>
         </div>
     </section>
 
