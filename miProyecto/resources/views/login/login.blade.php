@@ -22,7 +22,10 @@
 
     <div>
         <label for="email" class="mb-1.5 block text-sm font-semibold text-charcoal">Correo electrónico</label>
-        <input type="email" id="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="email"
+        <input type="text" id="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="email"
+                maxlength="40"
+            pattern="[a-z0-9.\-]+@[a-z0-9.\-]+"
+            title="Introduce un correo válido (ej: usuario@dominio.com)"
             class="block w-full rounded-xl border border-gray-200 bg-gray-50 py-3 px-4 text-charcoal placeholder:text-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand transition-all duration-300"
             placeholder="correo@ejemplo.com">
     </div>
@@ -30,6 +33,7 @@
     <div>
         <label for="password" class="mb-1.5 block text-sm font-semibold text-charcoal">Contraseña</label>
         <input type="password" id="password" name="password" required autocomplete="current-password"
+                maxlength="40"
             class="block w-full rounded-xl border border-gray-200 bg-gray-50 py-3 px-4 text-charcoal placeholder:text-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand transition-all duration-300"
             placeholder="Tu contraseña">
     </div>

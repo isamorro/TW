@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 
 use App\Models\Activity;
 use App\Models\Installation;
@@ -67,6 +69,31 @@ Route::post('/register', [RegisterController::class, 'store'])
 Route::view('/profile', 'login.profile')
     ->middleware('auth')
     ->name('profile');
+
+Route::post('/profile', function (Request $request) {
+    $validated = $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'current_password' => ['nullable', 'string', 'required_with:password'],
+        'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+    ]);
+
+    $user = $request->user();
+    $payload = ['name' => $validated['name']];
+
+    if ($request->filled('password')) {
+        if (!Hash::check($validated['current_password'], $user->password)) {
+            return back()
+                ->withErrors(['current_password' => 'La contraseña actual no es correcta.'])
+                ->withInput();
+        }
+
+        $payload['password'] = $validated['password'];
+    }
+
+    $user->update($payload);
+
+    return back()->with('status', 'Perfil actualizado correctamente.');
+})->middleware('auth')->name('profile.update');
 
 // Reservas de usuario
 

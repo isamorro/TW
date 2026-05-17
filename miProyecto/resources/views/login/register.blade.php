@@ -6,7 +6,7 @@
 <!-- Removed duplicative header link -->
 @endsection
 
-@section('content')
+            minlength="2" maxlength="40"
 
 <div class="mb-8 text-center">
     <h1 class="text-3xl font-extrabold tracking-tight text-charcoal">Crear cuenta</h1>
@@ -14,7 +14,7 @@
 </div>
 
 @if ($errors->any())
-    @include('login.form-errors')
+            maxlength="40"
 @endif
 
 <form action="{{ route('register.store') }}" method="POST" class="space-y-4">
@@ -22,7 +22,7 @@
     <div>
         <label for="name" class="mb-1.5 block text-sm font-semibold text-charcoal">Nombre completo</label>
         <input type="text" id="name" name="name" value="{{ old('name') }}" placeholder="Tu nombre" required
-            autocomplete="name"
+            minlength="8" maxlength="40"
             class="block w-full rounded-xl border border-gray-200 bg-gray-50 py-3 px-4 text-charcoal placeholder:text-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand transition-all duration-300">
     </div>
     
@@ -30,7 +30,7 @@
         <label for="email" class="mb-1.5 block text-sm font-semibold text-charcoal">Correo electrónico</label>
         <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="correo@ejemplo.com" required
             autocomplete="email"
-            class="block w-full rounded-xl border border-gray-200 bg-gray-50 py-3 px-4 text-charcoal placeholder:text-gray-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand transition-all duration-300">
+            minlength="8" maxlength="40"
     </div>
 
     <div>
