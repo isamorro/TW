@@ -109,6 +109,39 @@ class ReservationController extends Controller
         return redirect()->route('reservas')->with('success', 'Reserva cancelada.');
     }
 
+    /**
+     * Panel admin: gestionar reservas activas.
+     */
+    public function adminIndex()
+    {
+        $reservations = Reservation::with([
+                'user',
+                'session.activity',
+                'session.installation'
+            ])
+            ->where('status', 'active')
+            ->latest()
+            ->get();
+
+        return view('admin.reservations.index', compact('reservations'));
+    }
+
+    /**
+     * Panel admin: historial completo de reservas.
+     */
+    public function adminHistory()
+    {
+        $reservations = Reservation::with([
+                'user',
+                'session.activity',
+                'session.installation'
+            ])
+            ->latest()
+            ->get();
+
+        return view('admin.reservations.history', compact('reservations'));
+    }
+
     // ===== HELPERS PRIVADOS =====
 
     private function plazasOcupadas(SessionActivity $session): int

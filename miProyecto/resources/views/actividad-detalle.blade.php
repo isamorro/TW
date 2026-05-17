@@ -31,6 +31,16 @@
             Plazas disponibles: {{ $activity->capacity }}
         </p>
 
+        @auth
+            @if(auth()->user()->role === 'admin')
+                <a href="{{ route('admin.sessions.create', ['activity_id' => $activity->id]) }}"
+                class="inline-flex items-center gap-2 bg-brand hover:bg-brand-hover text-white px-4 py-2 rounded-lg font-bold mb-4">
+                    <i class="fa-solid fa-plus"></i>
+                    Añadir sesión
+                </a>
+            @endif
+        @endauth
+
         <!-- SESIONES DISPONIBLES -->
         <div class="mt-10 pt-8 border-t border-gray-200">
             <h2 class="text-2xl font-semibold mb-4">
@@ -66,11 +76,42 @@
                                 </p>
                             </div>
                             @auth
-                                <a href="{{ route('reservas.create', $session) }}"
-                                   class="inline-flex items-center gap-2 bg-brand hover:bg-brand-hover text-white px-4 py-2 rounded-lg font-bold transition-colors text-center justify-center">
-                                    <i class="fa-solid fa-calendar-check"></i>
-                                    Reservar
-                                </a>
+                                @if(auth()->user()->role === 'admin')
+
+                                    <div class="flex gap-2">
+
+                                        <a href="{{ route('admin.sessions.edit', $session) }}"
+                                        class="inline-flex items-center gap-2 bg-brand hover:bg-brand-hover text-white px-4 py-2 rounded-lg font-bold transition-colors text-center justify-center">
+                                            <i class="fa-solid fa-pen"></i>
+                                            Editar
+                                        </a>
+
+                                        <form method="POST"
+                                            action="{{ route('admin.sessions.destroy', $session) }}"
+                                            onsubmit="return confirm('¿Seguro que quieres eliminar este horario?');">
+
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button
+                                                class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-bold transition-colors text-center justify-center">
+                                                <i class="fa-solid fa-trash"></i>
+                                                Eliminar
+                                            </button>
+
+                                        </form>
+
+                                    </div>
+
+                                @else
+
+                                    <a href="{{ route('reservas.create', $session) }}"
+                                    class="inline-flex items-center gap-2 bg-brand hover:bg-brand-hover text-white px-4 py-2 rounded-lg font-bold transition-colors text-center justify-center">
+                                        <i class="fa-solid fa-calendar-check"></i>
+                                        Reservar
+                                    </a>
+
+                                @endif
                             @else
                                 <a href="{{ route('login') }}"
                                    class="inline-flex items-center gap-2 text-brand hover:text-brand-hover font-bold transition-colors text-center justify-center">

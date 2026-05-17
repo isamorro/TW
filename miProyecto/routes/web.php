@@ -4,13 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Activity;
 use App\Models\Installation;
 use App\Models\Reservation;
-use App\Http\Controllers\Admin\ActivityController;
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\Admin\InstallationController;
+use App\Http\Controllers\InstallationController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\SessionActivityController;
 
 // =============================
 // Rutas públicas
@@ -35,6 +36,10 @@ Route::get('/catalogo', function () {
 })->name('catalogo');
 
 Route::get('/catalogo/{activity}', function (Activity $activity) {
+    $activity->load([
+        'sessions.installation',
+        'sessions.reservations'
+    ]);
     $activities = Activity::orderBy('name')->get();
     return view('actividad-detalle', compact('activity', 'activities'));
 })->name('activities.show');
@@ -47,6 +52,7 @@ Route::get('/instalaciones', function () {
 // =============================
 // Rutas de autenticación
 // =============================
+
 Route::get('/login', function () {
     return view('login.login');
 })->name('login');
@@ -75,6 +81,7 @@ Route::view('/profile', 'login.profile')
 // =============================
 // Reservas del usuario (autenticado)
 // =============================
+
 Route::middleware('auth')->group(function () {
     Route::get('/usuario/reservas', [ReservationController::class, 'index'])->name('reservas');
     Route::get('/reservar/{session}', [ReservationController::class, 'create'])->name('reservas.create');
@@ -85,6 +92,7 @@ Route::middleware('auth')->group(function () {
 // =============================
 // Rutas de administración
 // =============================
+
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/panel', [AdminController::class, 'index'])->name('admin.panel');
     Route::get('/admin/activities', [ActivityController::class, 'adminList'])->name('admin.activities.index');
@@ -96,6 +104,18 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::resource('/admin/installations', InstallationController::class)
         ->names('admin.installations');
 
+    Route::get('/admin/reservations', [ReservationController::class, 'adminIndex'])
+    ->name('admin.reservations.index');
+
+    Route::get('/admin/reservations/history', [ReservationController::class, 'adminHistory'])
+        ->name('admin.reservations.history');
+
     Route::delete('/admin/reservations/{reservation}', [ReservationController::class, 'destroy'])
         ->name('admin.reservations.destroy');
+
+    Route::resource('/admin/sessions', SessionActivityController::class)
+        ->names('admin.sessions');
+
+    Route::resource('/admin/sessions', SessionActivityController::class)
+    ->names('admin.sessions');
 });

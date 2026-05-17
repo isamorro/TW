@@ -97,12 +97,12 @@
 
                 <div class="flex flex-col gap-3 mt-auto">
 
-                    <a href="#"
+                    <a href="{{ route('admin.reservations.index') }}"
                     class="bg-brand hover:bg-brand-hover text-white px-5 py-3 rounded-xl font-bold text-center transition-all duration-300 min-h-20 content-center">
                         Gestionar reservas
                     </a>
 
-                    <a href="#"
+                    <a href="{{ route('admin.reservations.history') }}"
                     class="border border-gray-200 hover:border-brand hover:text-brand px-5 py-3 rounded-xl font-semibold text-center transition-all duration-300">
                         Ver historial
                     </a>
