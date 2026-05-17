@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             InstallationSeeder::class,
             ActivitySeeder::class,
-            // Más adelante añadir SessionSeeder::class y ReservationSeeder::class
+            SessionActivitySeeder::class,
+            ReservationSeeder::class,
         ]);
 
         User::factory()->create([

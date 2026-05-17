@@ -12,5 +12,9 @@ class Activity extends Model
         'capacity',
         'image_path',
     ];
+    public function sessions()
+    {
+        return $this->hasMany(SessionActivity::class);
+    }
 }
 
