@@ -1,38 +1,87 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="max-w-3xl mx-auto px-4 py-10">
-    <h1 class="text-3xl font-bold mb-6">Editar actividad</h1>
+
+<section class="activity-create-container">
+
+    <div class="activity-create-header">
+        <h1>Editar actividad</h1>
+
+        <p>
+            Modifica la información de la actividad deportiva.
+        </p>
+    </div>
 
     <form method="POST"
-      action="{{ route('admin.activities.update', ['activity' => $activity->id]) }}"
-      class="activity-create-form">
+          action="{{ route('admin.activities.update', ['activity' => $activity->id]) }}"
+          class="activity-create-form">
+
         @csrf
         @method('PUT')
 
-        <label class="block">
+        <label class="activity-form-group">
+
             <span>Nombre</span>
-            <input name="name" class="w-full border rounded p-2" value="{{ old('name', $activity->name) }}">
+
+            <input
+                name="name"
+                value="{{ old('name', $activity->name) }}"
+                placeholder="Ej: Yoga"
+            >
+
         </label>
 
-        <label class="block">
+        <label class="activity-form-group">
+
             <span>Descripción</span>
-            <textarea name="description" class="w-full border rounded p-2">{{ old('description', $activity->description) }}</textarea>
+
+            <textarea
+                name="description"
+                rows="5"
+                placeholder="Describe la actividad...">{{ old('description', $activity->description) }}</textarea>
+
         </label>
 
-        <label class="block">
+        <label class="activity-form-group">
+
             <span>Capacidad</span>
-            <input type="number" name="capacity" class="w-full border rounded p-2" value="{{ old('capacity', $activity->capacity) }}">
+
+            <input
+                type="number"
+                name="capacity"
+                value="{{ old('capacity', $activity->capacity) }}"
+                placeholder="Ej: 20"
+            >
+
         </label>
 
-        <label class="block">
+        <label class="activity-form-group">
+
             <span>Ruta imagen</span>
-            <input name="image_path" class="w-full border rounded p-2" value="{{ old('image_path', $activity->image_path) }}">
+
+            <input
+                name="image_path"
+                value="{{ old('image_path', $activity->image_path) }}"
+                placeholder="images/yoga.png"
+            >
+
         </label>
 
-        <button class="bg-blue-600 text-white px-4 py-2 rounded">
-            Actualizar
-        </button>
+        <div class="activity-form-actions">
+
+            <a href="{{ route('catalogo') }}"
+               class="activity-btn-secondary">
+                Cancelar
+            </a>
+
+            <button class="activity-btn-primary">
+                Actualizar actividad
+            </button>
+
+        </div>
+
     </form>
+
 </section>
+
 @endsection
