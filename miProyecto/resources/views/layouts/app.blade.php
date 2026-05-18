@@ -261,7 +261,7 @@
                 <p class="text-gray-200 text-sm md:text-center">
                     © {{ date('Y') }} SportsCenter - Todos los derechos reservados
                 </p>
-                <a href="#" class="text-white hover:text-green-300 transition-colors duration-300 text-sm mt-3 md:mt-0">
+                <a href="{{ asset('como_se_hizo.pdf') }}" target="_blank">
                     Cómo se hizo
                 </a>
             </div>
