@@ -35,13 +35,13 @@ class SessionActivityController extends Controller
         ]);
 
         $session->update($validated);
-        return redirect()->route('admin.sessions.index')->with('success', 'Horario actualizado correctamente.');
+        return redirect()->route('activities.show', $session->activity)->with('success', 'Horario actualizado correctamente.');
     }
 
     public function destroy(SessionActivity $session)
     {
         $session->delete();
-        return redirect()->route('admin.sessions.index')->with('success', 'Horario eliminado correctamente.');  
+        return redirect()->route('activities.show', $session->activity)->with('success', 'Horario eliminado correctamente.');
     }
 
     public function create(Request $request)

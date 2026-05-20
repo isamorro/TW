@@ -53,7 +53,7 @@
         </label>
 
         <div class="activity-form-actions">
-            <a href="{{ route('admin.sessions.index') }}" class="activity-btn-secondary">
+            <a href="{{ route('activities.show', $session->activity) }}" class="activity-btn-secondary">
                 Cancelar
             </a>
 
